@@ -66,6 +66,9 @@ DESCRIPTION
     *   options_microdata - a hashref of options to pass through to
         "HTML::HTML5::Microdata::Parser->new" if/when parsing microdata.
 
+    *   options_outline - a hashref of options to pass through to
+        "HTML::HTML5::Outline->new" if/when parsing outlines.
+
     *   options_rdfa - an RDF::RDFa::Parser::Config object to use if/when
         parsing RDFa.
 

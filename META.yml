@@ -45,4 +45,4 @@ resources:
   homepage: http://search.cpan.org/dist/HTML-Data-Parser/
   license: http://dev.perl.org/licenses/
   repository: http://goddamn.co.uk/viewvc/perlmods/HTML-Data-Parser/
-version: 0.002
+version: 0.003

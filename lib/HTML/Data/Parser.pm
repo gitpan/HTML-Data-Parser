@@ -8,7 +8,7 @@ use RDF::RDFa::Parser 1.093;
 use Scalar::Util qw(blessed reftype);
 use XML::LibXML;
 
-our $VERSION = '0.002';
+our $VERSION = '0.003';
 
 BEGIN
 {
@@ -68,7 +68,7 @@ sub parse
 		$self->{'options_rdfa_default'} = RDF::RDFa::Parser::Config->new('html'); 
 	}
 
-	foreach my $type (qw[rdfa grddl microdata microformats turtle outline])
+	foreach my $type (qw[rdfa grddl microdata microformats n3 outline])
 	{
 		my $should_parse = $self->{"parse_${type}"};
 		unless (defined $should_parse and !$should_parse)
@@ -142,7 +142,7 @@ sub parse_rdfa
 			},
 		});
 	$parser->consume;
-	$self->{'_document_context'}->{'RDFA'} = $parser; # used by parse_turtle
+	$self->{'_document_context'}->{'RDFA'} = $parser; # used by parse_n3
 }
 
 sub parse_microdata
@@ -184,6 +184,8 @@ sub parse_n3
 		my ($st) = @_;
 		$self->handle_triple($handler, "${base}#graph/n3", $st);
 		});
+	
+	$self->{'_document_context'}->{'RDFA'} ||= $het->{rdfa_parser};
 }
 
 sub parse_microformats
@@ -224,12 +226,13 @@ sub parse_outline
 		$dom,
 		uri              => $base,
 		element_subjects => $es,
+		%{ $self->{'options_outline'} }
 		)
 			->to_rdf
 			->as_stream
 			->each(sub {
 				my ($st) = @_;
-				$self->handle_triple($handler, "${base}#graph/microformats", $st);
+				$self->handle_triple($handler, "${base}#graph/outline", $st);
 				});
 }
 
@@ -313,6 +316,9 @@ as a string). Defaults to 'warn'.
 
 =item * B<options_microdata> - a hashref of options to pass through to
 C<< HTML::HTML5::Microdata::Parser->new >> if/when parsing microdata.
+
+=item * B<options_outline> - a hashref of options to pass through to
+C<< HTML::HTML5::Outline->new >> if/when parsing outlines.
 
 =item * B<options_rdfa> - an L<RDF::RDFa::Parser::Config> object to use
 if/when parsing RDFa.
