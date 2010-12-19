@@ -14,6 +14,7 @@ SYNOPSIS
         parse_microformats => undef,
         parse_microdata    => undef,
         parse_n3           => undef,
+        parse_outline      => 0,
         );
       my $model  = RDF::Trine::Model->temporary_model;
       my $writer = RDF::Trine::Serializer->new('RDFXML');
@@ -35,10 +36,13 @@ DESCRIPTION
 
     *   N3-in-HTML <http://esw.w3.org/N3inHTML>
 
+    *   HTML5 Document Outline
+        <http://www.w3.org/TR/html5/sections.html#outlines>
+
     This module is just a wrapper around RDF::RDFa::Parser,
-    HTML::Microformats, XML::GRDDL, HTML::HTML5::Microdata::Parser and
-    HTML::Embedded::Turtle. It is a subclass of RDF::Trine::Parser so
-    inherits the same interface as that.
+    HTML::Microformats, XML::GRDDL, HTML::HTML5::Microdata::Parser,
+    HTML::Embedded::Turtle and HTML::HTML5::Outline. It is a subclass of
+    RDF::Trine::Parser so inherits the same interface as that.
 
   Constructor Options
     The methods presented by an HTML::Data::Parser object are exactly the
@@ -78,12 +82,14 @@ DESCRIPTION
 
     *   parse_n3 - another troolean. Defaults to undef.
 
-    *   parse_rdfa - another troolean. Defaults to 1.
+    *   parse_outline - another troolean. Defaults to false.
+
+    *   parse_rdfa - another troolean. Defaults to true.
 
 SEE ALSO
     This module is just a wrapper around: RDF::RDFa::Parser,
     HTML::Microformats, XML::GRDDL, HTML::HTML5::Microdata::Parser,
-    HTML::Embedded::Turtle.
+    HTML::HTML5::Outline, HTML::Embedded::Turtle.
 
     And around these DOM parsers: HTML::HTML5::Parser, XML::LibXML.
 

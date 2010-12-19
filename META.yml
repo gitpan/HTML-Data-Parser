@@ -31,6 +31,7 @@ no_index:
 recommends:
   HTML::Embedded::Turtle: 0
   HTML::HTML5::Microdata::Parser: 0
+  HTML::HTML5::Outline: 0
   HTML::Microformats: 0
   XML::GRDDL: 0
 requires:
@@ -44,4 +45,4 @@ resources:
   homepage: http://search.cpan.org/dist/HTML-Data-Parser/
   license: http://dev.perl.org/licenses/
   repository: http://goddamn.co.uk/viewvc/perlmods/HTML-Data-Parser/
-version: 0.001
+version: 0.002

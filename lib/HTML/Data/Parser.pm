@@ -8,7 +8,7 @@ use RDF::RDFa::Parser 1.093;
 use Scalar::Util qw(blessed reftype);
 use XML::LibXML;
 
-our $VERSION = '0.001';
+our $VERSION = '0.002';
 
 BEGIN
 {
@@ -26,6 +26,7 @@ sub new
 		parse_microdata    => undef,
 		parse_microformats => undef,
 		parse_n3           => undef,
+		parse_outline      => 0,
 		on_error           => 'warn',
 		%options,
 		}, $class;
@@ -45,6 +46,7 @@ sub parse
 		grddl        => ['XML::GRDDL'],
 		rdfa         => ['RDF::RDFa::Parser'],
 		microdata    => ['HTML::HTML5::Microdata::Parser'],
+		outline      => ['HTML::HTML5::Outline'],
 		microformats => ['HTML::Microformats'],
 		n3           => ['HTML::Embedded::Turtle'],
 		};
@@ -66,7 +68,7 @@ sub parse
 		$self->{'options_rdfa_default'} = RDF::RDFa::Parser::Config->new('html'); 
 	}
 
-	foreach my $type (qw[rdfa grddl microdata microformats turtle])
+	foreach my $type (qw[rdfa grddl microdata microformats turtle outline])
 	{
 		my $should_parse = $self->{"parse_${type}"};
 		unless (defined $should_parse and !$should_parse)
@@ -208,6 +210,29 @@ sub parse_grddl
 		});
 }
 
+sub parse_outline
+{
+	my ($self, $base, $dom, $handler) = @_;
+	
+	my $es = {};
+	if ($self->{'_document_context'}->{'RDFA'})
+	{
+		$es = $self->{'_document_context'}->{'RDFA'}->element_subjects;
+	}
+		
+	HTML::HTML5::Outline->new(
+		$dom,
+		uri              => $base,
+		element_subjects => $es,
+		)
+			->to_rdf
+			->as_stream
+			->each(sub {
+				my ($st) = @_;
+				$self->handle_triple($handler, "${base}#graph/microformats", $st);
+				});
+}
+
 1;
 
 __END__
@@ -230,6 +255,7 @@ so why shouldn't you?
     parse_microformats => undef,
     parse_microdata    => undef,
     parse_n3           => undef,
+    parse_outline      => 0,
     );
   my $model  = RDF::Trine::Model->temporary_model;
   my $writer = RDF::Trine::Serializer->new('RDFXML');
@@ -254,11 +280,14 @@ and patterns for embedding data:
 
 =item * N3-in-HTML L<http://esw.w3.org/N3inHTML>
 
+=item * HTML5 Document Outline L<http://www.w3.org/TR/html5/sections.html#outlines>
+
 =back
 
 This module is just a wrapper around L<RDF::RDFa::Parser>, L<HTML::Microformats>,
-L<XML::GRDDL>, L<HTML::HTML5::Microdata::Parser> and L<HTML::Embedded::Turtle>.
-It is a subclass of L<RDF::Trine::Parser> so inherits the same interface as that.
+L<XML::GRDDL>, L<HTML::HTML5::Microdata::Parser>, L<HTML::Embedded::Turtle> and
+L<HTML::HTML5::Outline>. It is a subclass of L<RDF::Trine::Parser> so inherits
+the same interface as that.
 
 =head2 Constructor Options
 
@@ -300,7 +329,9 @@ not. Defaults to false.
 
 =item * B<parse_n3> - another troolean. Defaults to undef.
 
-=item * B<parse_rdfa> - another troolean. Defaults to 1.
+=item * B<parse_outline> - another troolean. Defaults to false.
+
+=item * B<parse_rdfa> - another troolean. Defaults to true.
 
 =back
 
@@ -311,6 +342,7 @@ L<RDF::RDFa::Parser>,
 L<HTML::Microformats>,
 L<XML::GRDDL>,
 L<HTML::HTML5::Microdata::Parser>,
+L<HTML::HTML5::Outline>,
 L<HTML::Embedded::Turtle>.
 
 And around these DOM parsers:

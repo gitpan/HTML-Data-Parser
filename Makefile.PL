@@ -16,6 +16,7 @@ license             'perl';
 
 recommends          'HTML::Embedded::Turtle'          => 0;
 recommends          'HTML::HTML5::Microdata::Parser'  => 0;
+recommends          'HTML::HTML5::Outline'            => 0;
 requires            'HTML::HTML5::Parser'             => 0;
 recommends          'HTML::Microformats'              => 0;
 test_requires       'Module::Signature'               => '0.66';

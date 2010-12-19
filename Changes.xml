@@ -1,38 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rdf:RDF xmlns:dbug="http://ontologi.es/doap-bugs#" xmlns:dc="http://purl.org/dc/terms/" xmlns:dcs="http://ontologi.es/doap-changeset#" xmlns:doap="http://usefulinc.com/ns/doap#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
-<rdf:Description rdf:nodeID="r1AC9ACB8096711E0A5BFBFFE6C138F11r0">
-	<doap:browse rdf:resource="http://goddamn.co.uk/viewvc/perlmods/Example-Example/"/>
+<rdf:Description rdf:nodeID="rE192373C0B4E11E092B8A4686BD9ED04r0">
+	<dcs:item rdf:nodeID="rE192373C0B4E11E092B8A4686BD9ED04r1"/>
+	<dcs:versus rdf:resource="http://purl.org/NET/cpan-uri/dist/HTML-Data-Parser/v_0-001"/>
+</rdf:Description>
+<rdf:Description rdf:nodeID="rE192373C0B4E11E092B8A4686BD9ED04r1">
+	<rdf:type rdf:resource="http://ontologi.es/doap-changeset#Addition"/>
+	<rdfs:label xml:lang="en">Support for HTML::HTML5::Outline.</rdfs:label>
+</rdf:Description>
+<rdf:Description rdf:nodeID="rE192373C0B4E11E092B8A4686BD9ED04r2">
+	<doap:browse rdf:resource="http://goddamn.co.uk/viewvc/perlmods/HTML-Data-Parser/"/>
 	<rdf:type rdf:resource="http://usefulinc.com/ns/doap#SVNRepository"/>
 </rdf:Description>
 <rdf:Description rdf:about="file:///home/tai/src/perlmods/HTML-Data-Parser/Changes.ttl">
 	<dc:creator rdf:resource="http://tobyinkster.co.uk/#i"/>
-	<dc:description xml:lang="en">Revision history for Perl extension Example::Example.</dc:description>
-	<dc:subject rdf:resource="http://purl.org/NET/cpan-uri/dist/Example-Example/project"/>
+	<dc:description xml:lang="en">Revision history for Perl extension HTML::Data::Parser.</dc:description>
+	<dc:subject rdf:resource="http://purl.org/NET/cpan-uri/dist/HTML-Data-Parser/project"/>
 	<dc:title>Changes</dc:title>
 </rdf:Description>
-<rdf:Description rdf:about="http://purl.org/NET/cpan-uri/dist/Example-Example/project">
-	<doap:bug-database rdf:resource="http://rt.cpan.org/Dist/Display.html?Queue=Example-Example"/>
-	<doap:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2000-01-01</doap:created>
+<rdf:Description rdf:about="http://purl.org/NET/cpan-uri/dist/HTML-Data-Parser/project">
+	<doap:bug-database rdf:resource="http://rt.cpan.org/Dist/Display.html?Queue=HTML-Data-Parser"/>
+	<doap:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2010-12-15</doap:created>
 	<doap:developer rdf:resource="http://tobyinkster.co.uk/#i"/>
 	<doap:documenter rdf:resource="http://tobyinkster.co.uk/#i"/>
-	<doap:download-page rdf:resource="http://search.cpan.org/dist/Example-Example/"/>
-	<doap:homepage rdf:resource="http://search.cpan.org/dist/Example-Example/"/>
+	<doap:download-page rdf:resource="http://search.cpan.org/dist/HTML-Data-Parser/"/>
+	<doap:homepage rdf:resource="http://search.cpan.org/dist/HTML-Data-Parser/"/>
 	<doap:license rdf:resource="http://dev.perl.org/licenses/"/>
 	<doap:maintainer rdf:resource="http://tobyinkster.co.uk/#i"/>
-	<doap:name>Example-Example</doap:name>
+	<doap:name>HTML-Data-Parser</doap:name>
 	<doap:programming-language>Perl</doap:programming-language>
-	<doap:release rdf:resource="http://purl.org/NET/cpan-uri/dist/Example-Example/v_0-01"/>
-	<doap:repository rdf:nodeID="r1AC9ACB8096711E0A5BFBFFE6C138F11r0"/>
-	<doap:shortdesc xml:lang="en">Example Project</doap:shortdesc>
+	<doap:release rdf:resource="http://purl.org/NET/cpan-uri/dist/HTML-Data-Parser/v_0-001"/>
+	<doap:release rdf:resource="http://purl.org/NET/cpan-uri/dist/HTML-Data-Parser/v_0-002"/>
+	<doap:repository rdf:nodeID="rE192373C0B4E11E092B8A4686BD9ED04r2"/>
+	<doap:shortdesc xml:lang="en">parses data embedded in HTML</doap:shortdesc>
 	<doap:tester rdf:resource="http://tobyinkster.co.uk/#i"/>
 	<rdf:type rdf:resource="http://usefulinc.com/ns/doap#Project"/>
 </rdf:Description>
-<rdf:Description rdf:about="http://purl.org/NET/cpan-uri/dist/Example-Example/v_0-01">
-	<dc:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2000-01-01</dc:issued>
-	<doap:file-release rdf:resource="http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Example-Example-0.01.tar.gz"/>
-	<doap:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#string">0.01</doap:revision>
+<rdf:Description rdf:about="http://purl.org/NET/cpan-uri/dist/HTML-Data-Parser/v_0-001">
+	<dc:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2010-12-16</dc:issued>
+	<doap:file-release rdf:resource="http://backpan.cpan.org/authors/id/T/TO/TOBYINK/HTML-Data-Parser-0.001.tar.gz"/>
+	<doap:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#string">0.001</doap:revision>
 	<rdf:type rdf:resource="http://usefulinc.com/ns/doap#Version"/>
 	<rdfs:comment xml:lang="en">Original version</rdfs:comment>
+</rdf:Description>
+<rdf:Description rdf:about="http://purl.org/NET/cpan-uri/dist/HTML-Data-Parser/v_0-002">
+	<dcs:changelog rdf:nodeID="rE192373C0B4E11E092B8A4686BD9ED04r0"/>
+	<dc:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2010-12-19</dc:issued>
+	<doap:file-release rdf:resource="http://backpan.cpan.org/authors/id/T/TO/TOBYINK/HTML-Data-Parser-0.002.tar.gz"/>
+	<doap:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#string">0.002</doap:revision>
+	<rdf:type rdf:resource="http://usefulinc.com/ns/doap#Version"/>
 </rdf:Description>
 <rdf:Description xmlns:ns1="http://www.w3.org/2002/07/owl#" rdf:about="http://tobyinkster.co.uk/#i">
 	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
