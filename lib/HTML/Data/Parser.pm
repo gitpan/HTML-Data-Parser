@@ -1,18 +1,20 @@
 package HTML::Data::Parser;
 
-use base qw[RDF::Trine::Parser];
-
 use HTML::HTML5::Parser;
 use RDF::Trine;
 use RDF::RDFa::Parser 1.093;
 use Scalar::Util qw(blessed reftype);
 use XML::LibXML;
 
-our $VERSION = '0.003';
+use base qw[RDF::Trine::Parser];
+use Object::AUTHORITY;
 
 BEGIN
 {
-	$RDF::Trine::Parser::parser_names{ 'rdfa' } = __PACKAGE__;
+	$HTML::Data::Parser::AUTHORITY = 'cpan:TOBYINK';
+	$HTML::Data::Parser::VERSION   = '0.004';
+	
+	$RDF::Trine::Parser::parser_names{ 'htmldata' } = __PACKAGE__;
 }
 
 sub new
@@ -79,18 +81,18 @@ sub parse
 				unless $module[0] eq 'RDF::RDFa::Parser';
 			if (! $@)
 			{
-				my $sub = "parse_${type}";
+				my $sub = "_parse_${type}";
 				$self->$sub($base, $dom, $handler);
 			}
 			elsif (defined $should_parse)
 			{
-				$self->handle_error("Could not require @module: ".$@);
+				$self->_handle_error("Could not require @module: ".$@);
 			}
 		}
 	}
 }
 
-sub handle_triple
+sub _handle_triple
 {
 	my ($self, $handler, $g, $st) = @_;
 	my @nodes = $st->nodes;
@@ -110,7 +112,7 @@ sub handle_triple
 	$handler->($st);
 }
 
-sub handle_error
+sub _handle_error
 {
 	my ($self, $err) = @_;
 	if (reftype($self->{on_error}) eq 'CODE')
@@ -127,38 +129,38 @@ sub handle_error
 	}
 }
 
-sub parse_rdfa
+sub _parse_rdfa
 {
 	my ($self, $base, $dom, $handler) = @_;
 	my $parser = RDF::RDFa::Parser->new($dom, $base, $self->{'options_rdfa'}||$self->{'options_rdfa_default'});
 	$parser->set_callbacks({
 		ontriple => sub {
 			my ($p, $e, $st) = @_;
-			$self->handle_triple($handler, "${base}#graph/rdfa", $st);
+			$self->_handle_triple($handler, "${base}#graph/rdfa", $st);
 			},
 		onerror => sub {
 			my ($p, $l, $c, $e) = @_;
-			$self->handle_error("RDF::RDFa::Parser Error: ".$e);
+			$self->_handle_error("RDF::RDFa::Parser Error: ".$e);
 			},
 		});
 	$parser->consume;
 	$self->{'_document_context'}->{'RDFA'} = $parser; # used by parse_n3
 }
 
-sub parse_microdata
+sub _parse_microdata
 {
 	my ($self, $base, $dom, $handler) = @_;
 	my $parser = HTML::HTML5::Microdata::Parser->new($dom, $base, $self->{'options_microdata'});
 	$parser->set_callbacks({
 		ontriple => sub {
 			my ($p, $e, $st) = @_;
-			$self->handle_triple($handler, "${base}#graph/microdata", $st);
+			$self->_handle_triple($handler, "${base}#graph/microdata", $st);
 			},
 		});
 	$parser->consume;
 }
 
-sub parse_n3
+sub _parse_n3
 {
 	my ($self, $base, $dom, $handler) = @_;
 	
@@ -182,13 +184,13 @@ sub parse_n3
 	my $model = $het->union_graph;
 	$model->as_stream->each(sub {
 		my ($st) = @_;
-		$self->handle_triple($handler, "${base}#graph/n3", $st);
+		$self->_handle_triple($handler, "${base}#graph/n3", $st);
 		});
 	
 	$self->{'_document_context'}->{'RDFA'} ||= $het->{rdfa_parser};
 }
 
-sub parse_microformats
+sub _parse_microformats
 {
 	my ($self, $base, $dom, $handler) = @_;
 	
@@ -196,11 +198,11 @@ sub parse_microformats
 	my $model = $doc->model;
 	$model->as_stream->each(sub {
 		my ($st) = @_;
-		$self->handle_triple($handler, "${base}#graph/microformats", $st);
+		$self->_handle_triple($handler, "${base}#graph/microformats", $st);
 		});
 }
 
-sub parse_grddl
+sub _parse_grddl
 {
 	my ($self, $base, $dom, $handler) = @_;
 	
@@ -208,11 +210,11 @@ sub parse_grddl
 	my $model = $self->{'_instance_context'}->{'GRDDL'}->data($dom, $base);
 	$model->as_stream->each(sub {
 		my ($st) = @_;
-		$self->handle_triple($handler, "${base}#graph/grddl", $st);
+		$self->_handle_triple($handler, "${base}#graph/grddl", $st);
 		});
 }
 
-sub parse_outline
+sub _parse_outline
 {
 	my ($self, $base, $dom, $handler) = @_;
 	
@@ -232,7 +234,7 @@ sub parse_outline
 			->as_stream
 			->each(sub {
 				my ($st) = @_;
-				$self->handle_triple($handler, "${base}#graph/outline", $st);
+				$self->_handle_triple($handler, "${base}#graph/outline", $st);
 				});
 }
 
@@ -292,11 +294,11 @@ L<XML::GRDDL>, L<HTML::HTML5::Microdata::Parser>, L<HTML::Embedded::Turtle> and
 L<HTML::HTML5::Outline>. It is a subclass of L<RDF::Trine::Parser> so inherits
 the same interface as that.
 
-=head2 Constructor Options
+=head2 Constructor
 
-The methods presented by an HTML::Data::Parser object are exactly the same as any
-other common-or-garden L<RDF::Trine::Parser> object. The constructor options are
-where it gets interesting.
+=over
+
+=item C<< new( %options ) >>
 
 The options accepted are:
 
@@ -341,6 +343,22 @@ not. Defaults to false.
 
 =back
 
+=back
+
+=head2 Methods
+
+=over
+
+=item C<< parse($base, $data, \&handler) >>
+
+Parses the data, given a base URI. The handler coderef is called for each
+statement.
+
+=back
+
+Other methods such as C<parse_into_model>, C<parse_file> and
+C<parse_file_into_model> are inherited from L<RDF::Trine::Parser>.
+
 =head1 SEE ALSO
 
 This module is just a wrapper around:
@@ -369,10 +387,16 @@ Toby Inkster E<lt>tobyink@cpan.orgE<gt>.
 
 =head1 COPYRIGHT
 
-Copyright 2010 Toby Inkster
+Copyright 2010-2011 Toby Inkster
 
 This library is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
+
+=head1 DISCLAIMER OF WARRANTIES
+
+THIS PACKAGE IS PROVIDED "AS IS" AND WITHOUT ANY EXPRESS OR IMPLIED
+WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
+MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 
 =cut
 

@@ -1,5 +1,3 @@
-#############################################################
-
 @prefix :        <http://usefulinc.com/ns/doap#> .
 @prefix dcs:     <http://ontologi.es/doap-changeset#> .
 @prefix dc:      <http://purl.org/dc/terms/> .
@@ -9,27 +7,16 @@
 @prefix toby:    <http://tobyinkster.co.uk/#> .
 @prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
 
-#############################################################
-
-<>
-
-	dc:title         "Changes" ;
-	dc:description   "Revision history for Perl extension HTML::Data::Parser."@en ;
-	dc:subject       my:project ;
-	dc:creator       toby:i .
-
-#############################################################
-
+my:project :release my:v_0-001.
 my:v_0-001
-
 	a               :Version ;
 	dc:issued       "2010-12-16"^^xsd:date ;
 	:revision       "0.001"^^xsd:string ;
 	:file-release   <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/HTML-Data-Parser-0.001.tar.gz> ;
 	rdfs:comment    "Original version"@en .
 
+my:project :release my:v_0-002.
 my:v_0-002
-
 	a               :Version ;
 	dc:issued       "2010-12-19"^^xsd:date ;
 	:revision       "0.002"^^xsd:string ;
@@ -39,8 +26,8 @@ my:v_0-002
 		dcs:item [ rdfs:label "Support for HTML::HTML5::Outline."@en ; a dcs:Addition ]
 		] .
 
+my:project :release my:v_0-003.
 my:v_0-003
-
 	a               :Version ;
 	dc:issued       "2010-12-19"^^xsd:date ;
 	:revision       "0.003"^^xsd:string ;
@@ -52,35 +39,15 @@ my:v_0-003
 		dcs:item [ rdfs:label "parse_n3 method was being referred to as parse_turtle in places."@en ; a dcs:Bugfix ]
 		] .
 
-#############################################################
-
-my:project
-
-	a               :Project ;
-	:name           "HTML-Data-Parser" ;
-	:shortdesc      "parses data embedded in HTML"@en ;
-	:programming-language  "Perl" ;
-	:homepage       <http://search.cpan.org/dist/HTML-Data-Parser/> ;
-	:download-page  <http://search.cpan.org/dist/HTML-Data-Parser/> ;
-	:bug-database   <http://rt.cpan.org/Dist/Display.html?Queue=HTML-Data-Parser> ;
-	:repository     [ a :SVNRepository ; :browse <http://goddamn.co.uk/viewvc/perlmods/HTML-Data-Parser/> ] ;
-	:maintainer     toby:i ;
-	:developer      toby:i ;
-	:documenter     toby:i ;
-	:tester         toby:i ;
-	:created        "2010-12-15"^^xsd:date ;
-	:license        <http://dev.perl.org/licenses/> ;
-	:release        my:v_0-001 , my:v_0-002 .
-
-#############################################################
-
-toby:i
-
-	a               foaf:Person ;
-	foaf:name       "Toby Inkster" ;
-	foaf:homepage   <http://tobyinkster.co.uk/> ;
-	foaf:page       <http://search.cpan.org/~tobyink/> ;
-	foaf:mbox       <mailto:tobyink@cpan.org> ;
-	<http://www.w3.org/2002/07/owl#sameAs> <http://purl.org/NET/cpan-uri/person/tobyink> .
-
-#############################################################
+my:project :release my:v_0-004.
+my:v_0-004
+	a               :Version ;
+	dc:issued       "2011-12-07"^^xsd:date ;
+	:revision       "0.004"^^xsd:string ;
+	:file-release   <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/HTML-Data-Parser-0.004.tar.gz> ;
+	dcs:changelog [
+		dcs:versus my:v_0-003 ;
+		dcs:item   [ rdfs:label "Module::Package::RDF."@en ; a dcs:Packaging ] ;
+		dcs:item   [ rdfs:label "use 5.010"@en ; a dcs:Update ] ;
+		dcs:item   [ rdfs:label "use Object::AUTHORITY"@en ; a dcs:Update ]
+		] .
