@@ -38,6 +38,7 @@ recommends:
   XML::GRDDL: 0
 requires:
   HTML::HTML5::Parser: 0
+  Object::AUTHORITY: 0
   RDF::RDFa::Parser: 1.093
   RDF::Trine: 0.130
   Scalar::Util: 0
@@ -48,4 +49,4 @@ resources:
   homepage: https://metacpan.org/release/HTML-Data-Parser
   license: http://dev.perl.org/licenses/
   repository: https://bitbucket.org/tobyink/p5-html-data-parser
-version: 0.004
+version: 0.005

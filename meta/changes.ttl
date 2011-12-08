@@ -51,3 +51,14 @@ my:v_0-004
 		dcs:item   [ rdfs:label "use 5.010"@en ; a dcs:Update ] ;
 		dcs:item   [ rdfs:label "use Object::AUTHORITY"@en ; a dcs:Update ]
 		] .
+
+my:project :release my:v_0-005.
+my:v_0-005
+	a               :Version;
+	dc:issued       "2011-12-08"^^xsd:date;
+	:revision       "0.005"^^xsd:string;
+	:file-release   <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/HTML-Data-Parser-0.005.tar.gz>;
+	dcs:changelog [
+		dcs:versus my:v_0-004;
+		dcs:item   [ rdfs:label "Add dependency on Object::AUTHORITY."@en; a dcs:Packaging, dcs:Bugfix ]
+		] .

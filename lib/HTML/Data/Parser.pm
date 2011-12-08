@@ -12,7 +12,7 @@ use Object::AUTHORITY;
 BEGIN
 {
 	$HTML::Data::Parser::AUTHORITY = 'cpan:TOBYINK';
-	$HTML::Data::Parser::VERSION   = '0.004';
+	$HTML::Data::Parser::VERSION   = '0.005';
 	
 	$RDF::Trine::Parser::parser_names{ 'htmldata' } = __PACKAGE__;
 }
