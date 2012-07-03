@@ -12,9 +12,10 @@
 	:requires "HTML::HTML5::Parser 0";
 	:recommends "HTML::Microformats 0";
 	:requires "Object::AUTHORITY 0";
-	:requires "RDF::RDFa::Parser 1.093";
-	:requires "RDF::Trine 0.130";
+	:requires "RDF::RDFa::Parser 1.097";
+	:requires "RDF::Trine 1.000";
 	:requires "Scalar::Util 0";
+	:test_requires "RDF::Dumper 0.2";
 	:test_requires "Test::More 0.61";
 	:recommends "XML::GRDDL 0";
 	:requires "XML::LibXML 1.60".

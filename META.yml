@@ -3,12 +3,14 @@ abstract: 'parses data embedded in HTML'
 author:
   - 'Toby Inkster <tobyink@cpan.org>'
 build_requires:
-  ExtUtils::MakeMaker: 6.42
+  ExtUtils::MakeMaker: 6.59
+  RDF::Dumper: 0.2
   Test::More: 0.61
 configure_requires:
-  ExtUtils::MakeMaker: 6.42
+  ExtUtils::MakeMaker: 6.59
 distribution_type: module
-generated_by: 'Module::Install version 1.02'
+dynamic_config: 1
+generated_by: 'Module::Install version 1.06'
 keywords:
   - GRDDL
   - HTML
@@ -40,7 +42,7 @@ requires:
   HTML::HTML5::Parser: 0
   Object::AUTHORITY: 0
   RDF::RDFa::Parser: 1.093
-  RDF::Trine: 0.130
+  RDF::Trine: 1.000
   Scalar::Util: 0
   XML::LibXML: 1.60
   perl: 5.6.0
@@ -49,4 +51,4 @@ resources:
   homepage: https://metacpan.org/release/HTML-Data-Parser
   license: http://dev.perl.org/licenses/
   repository: https://bitbucket.org/tobyink/p5-html-data-parser
-version: 0.005
+version: 0.006

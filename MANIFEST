@@ -18,6 +18,7 @@ inc/Module/Package.pm
 inc/Module/Package/Dist/RDF.pm
 inc/Scalar/Util.pm
 inc/Scalar/Util/PP.pm
+inc/unicore/Name.pm
 inc/YAML/Tiny.pm
 lib/HTML/Data/Parser.pm
 LICENSE
@@ -27,6 +28,7 @@ META.yml
 meta/changes.ttl
 meta/doap.ttl
 meta/makefile.ttl
+meta/rt-bugs.ttl
 README
 t/01basic.t
 SIGNATURE                                Public-key signature (added by MakeMaker)

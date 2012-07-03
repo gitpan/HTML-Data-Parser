@@ -24,7 +24,7 @@ my:v_0-002
 	dcs:changelog [
 		dcs:versus my:v_0-001 ;
 		dcs:item [ rdfs:label "Support for HTML::HTML5::Outline."@en ; a dcs:Addition ]
-		] .
+	] .
 
 my:project :release my:v_0-003.
 my:v_0-003
@@ -37,7 +37,7 @@ my:v_0-003
 		dcs:item [ rdfs:label "options_outline option that is passed through to HTML::HTML5::Outline."@en ; a dcs:Addition ] ;
 		dcs:item [ rdfs:label "HTML5 outline data was going into the microformats graph."@en ; a dcs:Bugfix ] ;
 		dcs:item [ rdfs:label "parse_n3 method was being referred to as parse_turtle in places."@en ; a dcs:Bugfix ]
-		] .
+	] .
 
 my:project :release my:v_0-004.
 my:v_0-004
@@ -50,7 +50,7 @@ my:v_0-004
 		dcs:item   [ rdfs:label "Module::Package::RDF."@en ; a dcs:Packaging ] ;
 		dcs:item   [ rdfs:label "use 5.010"@en ; a dcs:Update ] ;
 		dcs:item   [ rdfs:label "use Object::AUTHORITY"@en ; a dcs:Update ]
-		] .
+	] .
 
 my:project :release my:v_0-005.
 my:v_0-005
@@ -61,4 +61,15 @@ my:v_0-005
 	dcs:changelog [
 		dcs:versus my:v_0-004;
 		dcs:item   [ rdfs:label "Add dependency on Object::AUTHORITY."@en; a dcs:Packaging, dcs:Bugfix ]
-		] .
+	] .
+
+my:project :release my:v_0-006.
+my:v_0-006
+	a               :Version;
+	dc:issued       "2012-07-03"^^xsd:date;
+	:revision       "0.006"^^xsd:string;
+	:file-release   <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/HTML-Data-Parser-0.006.tar.gz>;
+	dcs:changelog [
+		dcs:versus my:v_0-005;
+		dcs:item   [ rdfs:label "Test case was relying on RDFa 1.0 parsing, but RDF::RDFa::Parser now defaults to RDFa 1.1."@en ; a dcs:Bugfix ]
+	] .
